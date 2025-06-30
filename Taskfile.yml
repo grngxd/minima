@@ -1,0 +1,24 @@
+# https://taskfile.dev
+
+version: '3'
+tasks:
+  default:
+    cmds:
+      - go run .
+  dev:
+    cmds:
+      - go run -ldflags="-X main.Enviroment=dev" .
+  prod:
+    cmds:
+      - go run -ldflags="-X main.Enviroment=prod" .
+  build:prod:
+    cmds:
+      - go build -ldflags="-X main.Enviroment=prod"
+  build:dev:
+    cmds:
+      - go build -ldflags="-X main.Enviroment=dev"
+  build:web:
+    dir: ./web
+    cmds:
+      -  bun run build
+  #dev:web:
