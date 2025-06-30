@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@types/aos": "^3.0.7",
-    "aos": "^3.0.0-beta.6"
+    "aos": "^3.0.0-beta.6",
+    "monaco-editor": "^0.52.2"
   }
 }
