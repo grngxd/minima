@@ -1,14 +1,39 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import Monaco from "~/components/Monaco";
+import Monaco from "~/components/editor/CodeMirror";
 
 export default component$(() => {
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
+
       <Monaco
-        monaco={{
-          value: `console.log("Hello, Qwik!")`,
-          
+        editor={{
+            value: `
+import React from 'react';
+
+type AppState = {
+  count: number;
+};
+
+export default function App() {
+  const [state, setState] = React.useState<AppState>({ count: 0 });
+
+  return (
+  <div style={{ textAlign: 'center', marginTop: 40 }}>
+    <h1>Hello, TypeScript + React!</h1>
+    <p>Count: {state.count}</p>
+    <button onClick={() => setState({ count: state.count + 1 })}>
+    Increment
+    </button>
+    <button onClick={() => setState({ count: state.count - 1 })} style={{ marginLeft: 8 }}>
+    Decrement
+    </button>
+  </div>
+  );
+}
+      `.trim(),
+          language: "javascript",
+          theme: "vs-dark",
         }}
         style={{ height: "100%", width: "100%" }}
       />

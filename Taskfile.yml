@@ -1,24 +1,65 @@
 # https://taskfile.dev
 
 version: '3'
+
+vars:
+  DEV_LDFLAGS: "-X main.Environment=dev"
+  PROD_LDFLAGS: "-X main.Environment=prod"
+
 tasks:
   default:
+    desc: "Run the application in development mode"
     cmds:
-      - go run .
+      - task: create
+      - task: dev
+
+
   dev:
+    desc: "Run both Go and web in development mode"
+    deps: [dev:go, dev:web]
+
+  dev:go:
+    desc: "Run Go application in development mode"
     cmds:
-      - go run -ldflags="-X main.Enviroment=dev" .
+      - go run -ldflags="{{.DEV_LDFLAGS}}" .
+
+  dev:web:
+    desc: "Start web development server"
+    dir: ./web
+    cmds:
+      - bun run dev
+
+
   prod:
+    desc: "Run Go application in production mode"
     cmds:
-      - go run -ldflags="-X main.Enviroment=prod" .
-  build:prod:
+      - task: build:web
+      - go run -ldflags="{{.PROD_LDFLAGS}}" .
+
+
+  build:
+    desc: "Build both Go binary and web assets for production"
+    deps: [build:go, build:web]
+
+  build:go:
     cmds:
-      - go build -ldflags="-X main.Enviroment=prod"
-  build:dev:
-    cmds:
-      - go build -ldflags="-X main.Enviroment=dev"
+      - go build -ldflags="{{.PROD_LDFLAGS}}" -o out/minima .
+
   build:web:
     dir: ./web
     cmds:
-      -  bun run build
-  #dev:web:
+      - bun run build
+
+
+  clean:
+    cmds:
+      - rm -rf out/
+      - rm -rf web/dist/
+      - rm -rf web/server/
+
+  create:
+    cmds:
+      - mkdir -p out
+      - mkdir -p web/dist
+      - mkdir -p web/server
+      - touch web/dist/.satisfy

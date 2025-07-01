@@ -18,6 +18,7 @@ func main() {
 		Title:  "Minima",
 		Width:  800,
 		Height: 600,
+		Debug:  Enviroment == "dev",
 	})
 
 	app.Run(func() {

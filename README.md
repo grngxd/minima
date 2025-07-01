@@ -1,2 +1,3 @@
 # minima
-ultralight modular &amp; powerful code editor
+` ultralight, modular & powerful code editor* `
+*none of this is true 😭
