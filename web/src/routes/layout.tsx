@@ -1,7 +1,6 @@
 import { $, component$, Slot, useOnDocument } from '@builder.io/qwik';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import Sidebar from '~/components/chrome/Sidebar';
 import Statusbar from '~/components/chrome/Statusbar';
 import Titlebar from '~/components/chrome/Titlebar';
 import { useKeyboardShortcut } from '~/hooks/keyboard';
@@ -26,10 +25,7 @@ export default component$(() => {
     return (
         <div class="w-full h-full flex flex-col">
             <Titlebar />
-            <div class="w-full h-full flex">
-                <Sidebar />
-                <Slot />
-            </div>
+            <Slot />
             <Statusbar />
         </div>
     );

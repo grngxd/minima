@@ -3,7 +3,7 @@ import { indentWithTab } from "@codemirror/commands";
 import { javascript } from '@codemirror/lang-javascript';
 import { indentUnit } from '@codemirror/language';
 import { EditorState } from '@codemirror/state';
-import { oneDark } from '@codemirror/theme-one-dark';
+// import { oneDark } from '@codemirror/theme-one-dark';
 import { EditorView, keymap } from '@codemirror/view';
 import { basicSetup } from "codemirror";
 
@@ -28,7 +28,7 @@ export default component$((props: QwikIntrinsicElements["div"] & { editor: Parti
             state: EditorState.create({
                 extensions: [
                     basicSetup,
-                    oneDark,
+                    // oneDark,
                     keymap.of([indentWithTab]),
                     indentUnit.of("    "),
                     javascript({ jsx: true })
