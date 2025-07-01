@@ -1,7 +1,10 @@
 import { component$, isBrowser, QwikIntrinsicElements, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { indentWithTab } from "@codemirror/commands";
 import { javascript } from '@codemirror/lang-javascript';
+import { indentUnit } from '@codemirror/language';
 import { EditorState } from '@codemirror/state';
-import { EditorView } from '@codemirror/view';
+import { oneDark } from '@codemirror/theme-one-dark';
+import { EditorView, keymap } from '@codemirror/view';
 import { basicSetup } from "codemirror";
 
 export type EditorProps = {
@@ -23,6 +26,9 @@ export default component$((props: QwikIntrinsicElements["div"] & { editor: Parti
             state: EditorState.create({
                 extensions: [
                     basicSetup,
+                    oneDark,
+                    keymap.of([indentWithTab]),
+                    indentUnit.of("    "),
                     javascript({ jsx: true })
                 ],
                 doc: e.value || '',

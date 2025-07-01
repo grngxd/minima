@@ -39,11 +39,18 @@ tasks:
 
   build:
     desc: "Build both Go binary and web assets for production"
-    deps: [build:go, build:web]
+    cmds:
+      - task: build:web
+      - task: build:go
 
   build:go:
     cmds:
-      - go build -ldflags="{{.PROD_LDFLAGS}}" -o out/minima .
+      - |
+        if [ "$OS" = "Windows_NT" ]; then
+          go build -ldflags="{{.PROD_LDFLAGS}} -H windowsgui" -o out/minima.exe .
+        else
+          go build -ldflags="{{.PROD_LDFLAGS}}" -o out/minima .
+        fi
 
   build:web:
     dir: ./web

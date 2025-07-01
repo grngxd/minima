@@ -8,7 +8,7 @@ import (
 	"git.iwakura.rip/grng/tiramisu"
 )
 
-var Enviroment = "dev"
+var Environment = "dev"
 
 //go:embed web/dist/*
 var web embed.FS
@@ -18,11 +18,11 @@ func main() {
 		Title:  "Minima",
 		Width:  800,
 		Height: 600,
-		Debug:  Enviroment == "dev",
+		Debug:  Environment == "dev",
 	})
 
 	app.Run(func() {
-		if Enviroment == "prod" {
+		if Environment == "prod" {
 			// TODO: implement *tiramisu.Tiramisu.StaticFS(web) or whatever i shld call it
 			go func() {
 				fs, err := fs.Sub(web, "web/dist")
@@ -30,7 +30,7 @@ func main() {
 					panic(err)
 				}
 				http.Handle("/", http.FileServer(http.FS(fs)))
-				http.ListenAndServe("127.0.0.1:8080", nil)
+				http.ListenAndServe(":8080", nil)
 			}()
 			app.Navigate("http://localhost:8080")
 		} else {

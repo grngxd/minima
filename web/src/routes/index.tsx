@@ -1,12 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import Monaco from "~/components/editor/CodeMirror";
+import CodeMirror from "~/components/editor/CodeMirror";
 
 export default component$(() => {
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
 
-      <Monaco
+      <CodeMirror
         editor={{
             value: `
 import React from 'react';
@@ -31,9 +31,7 @@ export default function App() {
   </div>
   );
 }
-      `.trim(),
-          language: "javascript",
-          theme: "vs-dark",
+          `.trim(),
         }}
         style={{ height: "100%", width: "100%" }}
       />
