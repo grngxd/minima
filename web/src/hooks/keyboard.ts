@@ -51,7 +51,6 @@ export const useKeyboardShortcut = (
         }
     });
 
-    // Handle keydown events
     const handleKeyDown = $((event: KeyboardEvent) => {
         const key = event.key.toLowerCase();
         const pressedKeys = pressedKeysSignal.value;
@@ -86,19 +85,7 @@ export const useKeyboardShortcut = (
         newPressedKeys.delete(key);
         pressedKeysSignal.value = newPressedKeys;
         
-        if (!held) {
-
-            const newFiredCombos = new Set<string>();
-            
-            for (const firedCombo of firedCombosSignal.value) {
-                const comboKeys = firedCombo.split("+");
-                if (!comboKeys.includes(key)) {
-                    newFiredCombos.add(firedCombo);
-                }
-            }
-            
-            firedCombosSignal.value = newFiredCombos;
-        } else if (newPressedKeys.size === 0) {
+        if (newPressedKeys.size === 0) {
             firedCombosSignal.value = new Set<string>();
         }
     });
