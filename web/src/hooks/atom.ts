@@ -55,7 +55,7 @@ export function useAtomQrl<T>(qrl: QRL<Atom<T>>) {
 
         updating.value = true;
         const atom = await qrl.resolve()
-        atom.set(store.value);
+        atom.set({ ...store.value });
         updating.value = false;
     })
 

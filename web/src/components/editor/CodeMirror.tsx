@@ -30,11 +30,8 @@ export default component$((props: QwikIntrinsicElements["div"] & { editor: Parti
         if (!isBrowser || !container.value) return;
         
         const updateListener = EditorView.updateListener.of((update) => {
-            // Create a new state object instead of mutating properties
-            const newState = { ...state.value };
-            
             if (update.docChanged) {
-                newState.file = update.state.doc.toString();
+                state.value.file = update.state.doc.toString();
             }
             
             if (update.selectionSet) {
@@ -42,12 +39,10 @@ export default component$((props: QwikIntrinsicElements["div"] & { editor: Parti
                 const pos = selection.head;
                 const line = update.state.doc.lineAt(pos);
 
-                newState.line = line.number;
-                newState.col = pos - line.from + 1;
-                newState.amountSelected = selection.to - selection.from;
+                state.value.line = line.number;
+                state.value.col = pos - line.from + 1;
+                state.value.amountSelected = selection.to - selection.from;
             }
-            
-            state.value = newState;
         });
         
         const editor = new EditorView({
