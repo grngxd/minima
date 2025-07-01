@@ -51,6 +51,7 @@
     "@types/aos": "^3.0.7",
     "aos": "^3.0.0-beta.6",
     "codemirror": "^6.0.2",
-    "monaco-editor": "^0.52.2"
+    "monaco-editor": "^0.52.2",
+    "nanostores": "^1.0.1"
   }
 }

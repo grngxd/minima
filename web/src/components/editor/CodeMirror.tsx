@@ -13,9 +13,11 @@ export type EditorProps = {
     theme: string;
 }
 
+
 export default component$((props: QwikIntrinsicElements["div"] & { editor: Partial<EditorProps> }) => {
     const { editor: e, ...p } = props;
     const container = useSignal<HTMLDivElement>();
+    
 
     // eslint-disable-next-line qwik/no-use-visible-task
     useVisibleTask$(async () => {

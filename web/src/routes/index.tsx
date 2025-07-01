@@ -5,7 +5,6 @@ import CodeMirror from "~/components/editor/CodeMirror";
 export default component$(() => {
   return (
     <div style={{ height: "100vh", width: "100vw" }}>
-
       <CodeMirror
         editor={{
             value: `
