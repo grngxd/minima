@@ -4,7 +4,7 @@ import CodeMirror from "~/components/editor/CodeMirror";
 
 export default component$(() => {
   return (
-    <div style={{ height: "100vh", width: "100vw" }}>
+    <div class="w-full h-full flex flex-col">
       <CodeMirror
         editor={{
             value: `
@@ -32,7 +32,7 @@ export default function App() {
 }
           `.trim(),
         }}
-        style={{ height: "100%", width: "100%" }}
+        class="w-full h-full flex-grow"
       />
     </div>
   );
